@@ -1,12 +1,20 @@
 import "./styles.css";
 import { Project, Todos } from "./helpers/db.js";
 
-const todoSelect = document.querySelector("select#project-selection");
-const todoSubmit = document.querySelector("form button[type='submit']");
+const projectSelect = document.querySelector("select#project-selection");
 const todoTitle = document.querySelector("#todo-title");
 const todoDescription = document.querySelector("#todo-description");
 const todoDuedate = document.querySelector("#todo-duedate");
 const todoPriority = document.querySelector("#todo-priority");
+const todoSubmit = document.querySelector(
+  ".todo-container button[type='submit']"
+);
+
+const projectTitle = document.querySelector("#project-title");
+const projectDescription = document.querySelector("#project-description");
+const projectSubmit = document.querySelector(
+  ".project-container button[type='submit']"
+);
 
 let newTodos = [
   new Todos("Meeting", "Start planning", "March 2024", "High"),
@@ -36,11 +44,12 @@ function addProjects(title, description) {
 }
 
 function displayProjects() {
+  projectSelect.textContent = "";
   projectList.forEach((project, index) => {
     let option = document.createElement("option");
     option.textContent = project.title;
     option.value = index;
-    todoSelect.appendChild(option);
+    projectSelect.appendChild(option);
   });
 }
 
@@ -48,15 +57,22 @@ function displayProjects() {
 todoSubmit.addEventListener("click", (e) => {
   e.preventDefault();
 
-  if (todoSelect != null) {
+  if (projectSelect != null) {
     addTodos(
-      todoSelect.value,
+      projectSelect.value,
       todoTitle.value,
       todoDescription.value,
       todoDuedate.value,
       todoPriority.value
     );
   }
+});
+
+projectSubmit.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  addProjects(projectTitle.value, projectDescription.value);
+  displayProjects();
 });
 
 function init() {

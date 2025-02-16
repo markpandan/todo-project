@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  margin: 0;
 }
 
 body {
@@ -9,7 +10,8 @@ body {
   justify-content: center;
   text-align: center;
 }
-.todo-container {
+.todo-container,
+.project-container {
   margin: auto;
   padding: 1.5rem 4rem;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
@@ -37,6 +39,7 @@ form > div > input {
 
 .buttonGroup {
   display: flex;
+  justify-content: center;
   gap: 16px;
 }
 
