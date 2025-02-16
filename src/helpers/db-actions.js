@@ -1,4 +1,4 @@
-import { Project, Todos } from "./helpers/db.js";
+import { Project, Todos } from "./db.js";
 
 let newTodos = [
   new Todos("Meeting", "Start planning", "March 2024", "High"),
@@ -10,9 +10,8 @@ let newTodos = [
   ),
 ];
 
-let projectList = [];
-let project = new Project("New Workspace", "My Initial Work", newTodos);
-projectList.push(project);
+export let projectList = [];
+projectList.push(new Project("New Workspace", "My Initial Work", newTodos));
 projectList.push(new Project("ToDo Project", "My Initial Work", newTodos));
 
 export function addTodos(index, title, description, dueDate, priority) {

@@ -1,5 +1,5 @@
 import "./styles.css";
-import { Project, Todos } from "./helpers/db.js";
+import { projectList, addTodos, addProjects } from "./helpers/db-actions.js";
 
 const projectSelect = document.querySelector("select#project-selection");
 const todoTitle = document.querySelector("#todo-title");
@@ -15,43 +15,6 @@ const projectDescription = document.querySelector("#project-description");
 const projectSubmit = document.querySelector(
   ".project-container button[type='submit']"
 );
-
-let newTodos = [
-  new Todos("Meeting", "Start planning", "March 2024", "High"),
-  new Todos(
-    "Implementation",
-    "Initial project execution",
-    "April 2024",
-    "Medium"
-  ),
-];
-
-let projectList = [];
-let project = new Project("New Workspace", "My Initial Work", newTodos);
-projectList.push(project);
-projectList.push(new Project("ToDo Project", "My Initial Work", newTodos));
-
-function addTodos(index, title, description, dueDate, priority) {
-  projectList[index].todos.push(
-    new Todos(title, description, dueDate, priority)
-  );
-  console.log(projectList);
-}
-
-function addProjects(title, description) {
-  projectList.push(new Project(title, description, []));
-  console.log(projectList);
-}
-
-function displayProjects() {
-  projectSelect.textContent = "";
-  projectList.forEach((project, index) => {
-    let option = document.createElement("option");
-    option.textContent = project.title;
-    option.value = index;
-    projectSelect.appendChild(option);
-  });
-}
 
 // TODO: Implement a form validation
 todoSubmit.addEventListener("click", (e) => {
@@ -74,6 +37,16 @@ projectSubmit.addEventListener("click", (e) => {
   addProjects(projectTitle.value, projectDescription.value);
   displayProjects();
 });
+
+function displayProjects() {
+  projectSelect.textContent = "";
+  projectList.forEach((project, index) => {
+    let option = document.createElement("option");
+    option.textContent = project.title;
+    option.value = index;
+    projectSelect.appendChild(option);
+  });
+}
 
 function init() {
   displayProjects();
