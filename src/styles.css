@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.todo-container {
+  margin: auto;
+  padding: 1.5rem 4rem;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  /* border: 1px solid black; */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 16px;
+}
+
+form > div {
+  display: flex;
+}
+
+form > div > label {
+  flex: 1;
+}
+
+form > div > input {
+  flex: 2;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 16px;
+}
+
+.buttonGroup > button {
+  align-self: center;
+  padding: 0.5rem 2rem;
+}
