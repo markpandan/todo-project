@@ -2,40 +2,44 @@ import "./styles.css";
 import { projectList, addTodos, addProjects } from "./helpers/db-actions.js";
 
 const projectSelect = document.querySelector("select#project-selection");
-const todoTitle = document.querySelector("#todo-title");
-const todoDescription = document.querySelector("#todo-description");
-const todoDuedate = document.querySelector("#todo-duedate");
-const todoPriority = document.querySelector("#todo-priority");
-const todoSubmit = document.querySelector(
-  ".todo-container button[type='submit']"
-);
-
-const projectTitle = document.querySelector("#project-title");
-const projectDescription = document.querySelector("#project-description");
-const projectSubmit = document.querySelector(
-  ".project-container button[type='submit']"
-);
 
 // TODO: Implement a form validation
-todoSubmit.addEventListener("click", (e) => {
+const projectForm = document.querySelector("#project-form");
+projectForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  if (projectSelect != null) {
-    addTodos(
-      projectSelect.value,
-      todoTitle.value,
-      todoDescription.value,
-      todoDuedate.value,
-      todoPriority.value
-    );
-  }
+  const formData = {
+    projectTitle: projectForm["project-title"].value,
+    projectDescription: projectForm["project-description"].value,
+  };
+
+  addProjects(formData.projectTitle, formData.projectDescription);
+  displayProjects();
 });
 
-projectSubmit.addEventListener("click", (e) => {
+const todoForm = document.querySelector("#todo-form");
+todoForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  addProjects(projectTitle.value, projectDescription.value);
-  displayProjects();
+  const formData = {
+    projectSelection: todoForm["project-selection"].value,
+    todoTitle: todoForm["todo-title"].value,
+    todoDescription: todoForm["todo-description"].value,
+    todoDuedate: todoForm["todo-duedate"].value,
+    todoPriority: todoForm["todo-priority"].value,
+  };
+
+  if (formData.projectSelection != null) {
+    addTodos(
+      formData.projectSelection,
+      formData.todoTitle,
+      formData.todoDescription,
+      formData.todoDuedate,
+      formData.todoPriority
+    );
+  }
+
+  todoForm.reset();
 });
 
 function displayProjects() {
