@@ -1,0 +1,122 @@
+:root {
+  --black-1: #0a0a0a;
+  --black-2: #1a1a1a;
+  --black-3: #2a2a2a;
+  --black-4: #3a3a3a;
+  --black-5: #4a4a4a;
+  --font-color: #fff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+  height: 100vh;
+  display: grid;
+  grid-template: 100px 9fr / 1fr 4fr;
+  grid-template-areas:
+    "header header"
+    "aside content";
+
+  color: var(--font-color);
+}
+
+button {
+  cursor: pointer;
+  background-color: var(--black-3);
+  color: white;
+  border: none;
+  text-decoration: none;
+  padding: 0 0.5rem;
+  font-size: xx-large;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.project-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.project-list > li {
+  border-bottom: 1px solid white;
+}
+
+button#add-task {
+  border-radius: 50%;
+}
+
+nav {
+  grid-area: header;
+  background-color: var(--black-3);
+
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+aside {
+  grid-area: aside;
+  background-color: var(--black-4);
+
+  padding: 3rem;
+}
+
+.content {
+  padding: 3rem;
+  grid-area: content;
+  background-color: var(--black-4);
+}
+
+.content-header {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid white;
+
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+
+.content-buttonGroup {
+  display: flex;
+  gap: 10px;
+}
+
+/* .content-buttonGroup > button {
+  border-radius: 16px;
+  font-size: x-large;
+  padding: 0.5rem 0.5rem;
+} */
+
+.task-list {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.75rem;
+}
+
+.task-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  background-color: var(--black-5);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.task-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

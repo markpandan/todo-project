@@ -1,6 +1,7 @@
-import "./styles.css";
+import "./css/styles.css";
 import { projectList, addTodos, addProjects } from "./helpers/db-actions.js";
 
+let currentProjectIndex = 0;
 const projectSelect = document.querySelector("select#project-selection");
 
 // TODO: Implement a form validation
@@ -38,8 +39,6 @@ todoForm.addEventListener("submit", (e) => {
       formData.todoPriority
     );
   }
-
-  todoForm.reset();
 });
 
 function displayProjects() {

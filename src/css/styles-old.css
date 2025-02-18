@@ -10,6 +10,7 @@ body {
   justify-content: center;
   text-align: center;
 }
+
 .todo-container,
 .project-container {
   margin: auto;
