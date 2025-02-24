@@ -1,0 +1,59 @@
+dialog {
+  width: 25rem;
+}
+
+dialog h3 {
+  margin-bottom: 24px;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dialog-close {
+  background: transparent;
+  font-size: medium;
+  padding: 0;
+  align-self: flex-start;
+  font-size: larger;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-input-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.form-input-container > * {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+select {
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 16px;
+  background-color: var(--black-5);
+  color: var(--font-color);
+}
+
+.dialog-buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.dialog-buttonGroup button {
+  border: 0;
+  border-radius: 8px;
+  font-size: medium;
+  padding: 8px 8px;
+}

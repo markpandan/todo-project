@@ -1,4 +1,6 @@
 import "./css/styles.css";
+import "./css/dialog-styles.css";
+import "./css/form-styles.css";
 import { projectList, addTodos, addProjects } from "./helpers/db-actions.js";
 
 let currentProjectIndex = 0;
@@ -40,6 +42,20 @@ todoForm.addEventListener("submit", (e) => {
     );
   }
 });
+
+const btnAddTodo = document.querySelector("#addTodo");
+const dialogTodo = document.querySelector(".dialog-todo");
+btnAddTodo.addEventListener("click", () => {
+  dialogTodo.showModal();
+});
+// dialogTodo.showModal();
+
+const btnAddProject = document.querySelector("#addProject");
+const dialogProject = document.querySelector(".dialog-project");
+btnAddProject.addEventListener("click", () => {
+  dialogProject.showModal();
+});
+dialogProject.showModal();
 
 function displayProjects() {
   projectSelect.textContent = "";

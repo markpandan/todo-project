@@ -1,18 +1,7 @@
-:root {
-  --black-1: #0a0a0a;
-  --black-2: #1a1a1a;
-  --black-3: #2a2a2a;
-  --black-4: #3a3a3a;
-  --black-5: #4a4a4a;
-  --font-color: #fff;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-}
+@import url(constants.css);
 
 body {
+  margin: 0;
   font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
@@ -28,8 +17,8 @@ body {
 
 button {
   cursor: pointer;
-  background-color: var(--black-3);
-  color: white;
+  background-color: var(--black-5);
+  color: var(--font-color);
   border: none;
   text-decoration: none;
   padding: 0 0.5rem;
