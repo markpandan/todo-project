@@ -53,7 +53,6 @@ function displayProjects() {
   projectSelect.textContent = "";
   projectButtonGroup.textContent = "";
   projects.list.forEach((project, index) => {
-    console.log(project);
     let option = document.createElement("option");
     option.textContent = project.title;
     option.value = index;

@@ -62,6 +62,10 @@ aside {
   padding: 3rem;
 }
 
+/* aside > * {
+  font-size: 2em;
+} */
+
 .content {
   padding: 3rem;
   grid-area: content;
