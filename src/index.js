@@ -1,70 +1,47 @@
 import "./css/styles.css";
 import { projectList, addTodos, addProjects } from "./helpers/db-actions.js";
+import dialog from "./components/dialog.js";
+import form from "./components/form.js";
 
-// let currentProjectIndex = 0;
-const btnAddProject = document.querySelector("#addProject");
-const dialogProject = document.querySelector(".dialog-project");
-btnAddProject.addEventListener("click", () => {
-  dialogProject.showModal();
-});
-const btnCloseDialogProject = document.querySelector(
+const todoHeader = document.querySelector(".content-header > h1");
+const dialogProject = dialog(
+  ".dialog-project",
+  "#addProject",
   ".dialog-project .dialog-close"
 );
-btnCloseDialogProject.addEventListener("click", () => {
-  dialogProject.close();
-});
 
-const btnAddTodo = document.querySelector("#addTodo");
-const dialogTodo = document.querySelector(".dialog-todo");
-btnAddTodo.addEventListener("click", () => {
-  dialogTodo.showModal();
-});
-const btnCloseDialogTodo = document.querySelector(".dialog-todo .dialog-close");
-btnCloseDialogTodo.addEventListener("click", () => {
-  dialogTodo.close();
-});
+const dialogTodo = dialog(
+  ".dialog-todo",
+  "#addTodo",
+  ".dialog-todo .dialog-close"
+);
 
-// TODO: Implement a form validation
-const projectForm = document.querySelector("#project-form");
-projectForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
+form("#project-form", (formDOM) => {
   const formData = {
-    projectTitle: projectForm["project-title"].value,
-    projectDescription: projectForm["project-description"].value,
+    projectTitle: formDOM["project-title"].value,
+    projectDescription: formDOM["project-description"].value,
   };
 
-  addProjects(formData.projectTitle, formData.projectDescription);
+  addProjects(...Object.values(formData));
   displayProjects();
 
   dialogProject.close();
-  projectForm.reset();
 });
 
-const todoForm = document.querySelector("#todo-form");
-todoForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
+form("#todo-form", (formDOM) => {
   const formData = {
-    projectSelection: todoForm["project-selection"].value,
-    todoTitle: todoForm["todo-title"].value,
-    todoDescription: todoForm["todo-description"].value,
-    todoDuedate: todoForm["todo-duedate"].value,
-    todoPriority: todoForm["todo-priority"].value,
+    projectSelection: formDOM["project-selection"].value,
+    todoTitle: formDOM["todo-title"].value,
+    todoDescription: formDOM["todo-description"].value,
+    todoDuedate: formDOM["todo-duedate"].value,
+    todoPriority: formDOM["todo-priority"].value,
   };
 
   if (formData.projectSelection != null) {
-    addTodos(
-      formData.projectSelection,
-      formData.todoTitle,
-      formData.todoDescription,
-      formData.todoDuedate,
-      formData.todoPriority
-    );
+    addTodos(...Object.values(formData));
   }
 
   dialogTodo.close();
-  todoForm.reset();
   init(formData.projectSelection);
 });
 
@@ -85,6 +62,7 @@ function displayProjects() {
 
   projectButtonGroup.addEventListener("click", (e) => {
     if (e.target.localName === "li") {
+      todoHeader.textContent = e.target.innerHTML;
       displayTodo(e.target.dataset.index);
     }
   });
@@ -94,7 +72,9 @@ function displayTodo(index) {
   const todoList = document.querySelector(".todo-list");
   todoList.textContent = "";
 
-  projectList[index].todos.forEach((todos) => {
+  const project = projectList[index];
+  todoHeader.textContent = project.title;
+  project.todos.forEach((todos) => {
     const todoCard = document.createElement("div");
     todoCard.classList.add("todo-card");
     todoCard.innerHTML = `<section class="todo-card-header">
@@ -107,7 +87,6 @@ function displayTodo(index) {
                           <article>
                             ${todos.description}
                           </article>`;
-
     todoList.appendChild(todoCard);
   });
 }
