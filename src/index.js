@@ -3,8 +3,30 @@ import "./css/dialog-styles.css";
 import "./css/form-styles.css";
 import { projectList, addTodos, addProjects } from "./helpers/db-actions.js";
 
-let currentProjectIndex = 0;
+// let currentProjectIndex = 0;
 const projectSelect = document.querySelector("select#project-selection");
+
+const btnAddProject = document.querySelector("#addProject");
+const dialogProject = document.querySelector(".dialog-project");
+btnAddProject.addEventListener("click", () => {
+  dialogProject.showModal();
+});
+const btnCloseDialogProject = document.querySelector(
+  ".dialog-project .dialog-close"
+);
+btnCloseDialogProject.addEventListener("click", () => {
+  dialogProject.close();
+});
+
+const btnAddTodo = document.querySelector("#addTodo");
+const dialogTodo = document.querySelector(".dialog-todo");
+btnAddTodo.addEventListener("click", () => {
+  dialogTodo.showModal();
+});
+const btnCloseDialogTodo = document.querySelector(".dialog-todo .dialog-close");
+btnCloseDialogTodo.addEventListener("click", () => {
+  dialogTodo.close();
+});
 
 // TODO: Implement a form validation
 const projectForm = document.querySelector("#project-form");
@@ -18,6 +40,9 @@ projectForm.addEventListener("submit", (e) => {
 
   addProjects(formData.projectTitle, formData.projectDescription);
   displayProjects();
+
+  dialogProject.close();
+  projectForm.reset();
 });
 
 const todoForm = document.querySelector("#todo-form");
@@ -41,21 +66,10 @@ todoForm.addEventListener("submit", (e) => {
       formData.todoPriority
     );
   }
-});
 
-const btnAddTodo = document.querySelector("#addTodo");
-const dialogTodo = document.querySelector(".dialog-todo");
-btnAddTodo.addEventListener("click", () => {
-  dialogTodo.showModal();
+  dialogTodo.close();
+  todoForm.reset();
 });
-// dialogTodo.showModal();
-
-const btnAddProject = document.querySelector("#addProject");
-const dialogProject = document.querySelector(".dialog-project");
-btnAddProject.addEventListener("click", () => {
-  dialogProject.showModal();
-});
-dialogProject.showModal();
 
 function displayProjects() {
   projectSelect.textContent = "";
