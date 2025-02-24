@@ -1,7 +1,9 @@
 import "./css/styles.css";
-import { projectList, addTodos, addProjects } from "./helpers/db-actions.js";
+import { DatabaseLocalStorage } from "./helpers/db-actions.js";
 import dialog from "./components/dialog.js";
 import form from "./components/form.js";
+
+const projects = new DatabaseLocalStorage();
 
 const todoHeader = document.querySelector(".content-header > h1");
 const dialogProject = dialog(
@@ -21,8 +23,7 @@ form("#project-form", (formDOM) => {
     projectTitle: formDOM["project-title"].value,
     projectDescription: formDOM["project-description"].value,
   };
-
-  addProjects(...Object.values(formData));
+  projects.addProjects(...Object.values(formData));
   displayProjects();
 
   dialogProject.close();
@@ -38,7 +39,7 @@ form("#todo-form", (formDOM) => {
   };
 
   if (formData.projectSelection != null) {
-    addTodos(...Object.values(formData));
+    projects.addTodos(...Object.values(formData));
   }
 
   dialogTodo.close();
@@ -51,7 +52,8 @@ function displayProjects() {
 
   projectSelect.textContent = "";
   projectButtonGroup.textContent = "";
-  projectList.forEach((project, index) => {
+  projects.list.forEach((project, index) => {
+    console.log(project);
     let option = document.createElement("option");
     option.textContent = project.title;
     option.value = index;
@@ -72,26 +74,29 @@ function displayTodo(index) {
   const todoList = document.querySelector(".todo-list");
   todoList.textContent = "";
 
-  const project = projectList[index];
-  todoHeader.textContent = project.title;
-  project.todos.forEach((todos) => {
-    const todoCard = document.createElement("div");
-    todoCard.classList.add("todo-card");
-    todoCard.innerHTML = `<section class="todo-card-header">
-                            <div>
-                              <h2>${todos.title}</h2>
-                              <h5>${todos.dueDate}</h5>
-                            </div>
-                              <h5>${todos.priority}</h5>
-                          </section>
-                          <article>
-                            ${todos.description}
-                          </article>`;
-    todoList.appendChild(todoCard);
-  });
+  let project;
+  if ((project = projects.getProject(index))) {
+    todoHeader.textContent = project.title;
+    project.todos.forEach((todos) => {
+      const todoCard = document.createElement("div");
+      todoCard.classList.add("todo-card");
+      todoCard.innerHTML = `<section class="todo-card-header">
+                              <div>
+                                <h2>${todos.title}</h2>
+                                <h5>${todos.dueDate}</h5>
+                              </div>
+                                <h5>${todos.priority}</h5>
+                            </section>
+                            <article>
+                              ${todos.description}
+                            </article>`;
+      todoList.appendChild(todoCard);
+    });
+  }
 }
 
 function init(index = 0) {
+  localStorage.clear();
   displayProjects();
   displayTodo(index);
 }

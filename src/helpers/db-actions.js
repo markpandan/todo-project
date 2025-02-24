@@ -1,40 +1,68 @@
-import { Project, Todos } from "./db.js";
+import {
+  ProjectObject,
+  TodoObject,
+  ProjectConstructor,
+  TodosConstructor,
+} from "./db.js";
 
-let newTodos = [
-  new Todos("Meeting", "Start planning", "March 2024", "High"),
-  new Todos(
-    "Implementation",
-    "Initial project execution",
-    "April 2024",
-    "Medium"
-  ),
-];
+export class DatabaseConstrutor {
+  constructor() {
+    this.list = [];
+  }
 
-let newTodos2 = [
-  new Todos("Meeting", "Start planning", "March 2024", "High"),
-  new Todos(
-    "Implementation",
-    "Initial project execution",
-    "April 2024",
-    "Medium"
-  ),
-];
+  addTodos(index, title, description, dueDate, priority) {
+    this.list[index].todos.push(
+      new TodosConstructor(title, description, dueDate, priority)
+    );
+  }
 
-export let projectList = [];
-projectList.push(new Project("New Workspace", "My Initial Work", newTodos));
-projectList.push(new Project("ToDo Project", "My Initial Work", newTodos2));
+  addProjects(title, description) {
+    this.list.push(new ProjectConstructor(title, description, []));
+  }
 
-export function addTodos(index, title, description, dueDate, priority) {
-  projectList[index].todos.push(
-    new Todos(title, description, dueDate, priority)
-  );
+  getProject(index) {
+    return this.list[index];
+  }
 }
 
-export function addProjects(title, description) {
-  projectList.push(new Project(title, description, []));
-  console.log(projectList);
-}
+export class DatabaseLocalStorage {
+  constructor() {
+    this.list;
+    this.setProject();
+  }
 
-projectList[0].todos.push(
-  new Todos("title", "description", "dueDate", "priority")
-);
+  addTodos(index, title, description, dueDate, priority) {
+    console.log(index);
+    const project = JSON.parse(localStorage.getItem(index));
+    console.log(project);
+
+    const todo = TodoObject;
+    todo.title = title;
+    todo.descrption = description;
+    todo.dueDate = dueDate;
+    todo.priority = priority;
+    project.todos.push(todo);
+
+    localStorage.setItem(index, JSON.stringify(project));
+    this.setProject();
+  }
+
+  addProjects(title, description) {
+    const project = ProjectObject;
+    project.title = title;
+    project.descrtiption = description;
+    localStorage.setItem(localStorage.length, JSON.stringify(project));
+
+    this.setProject();
+  }
+
+  getProject(index) {
+    return this.list[index];
+  }
+
+  setProject() {
+    this.list = Object.values(localStorage)
+      .map((value) => JSON.parse(value))
+      .reverse();
+  }
+}
