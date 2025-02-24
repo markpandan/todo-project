@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo Website</title>
+  <script defer src="main.js"></script></head>
+  <body>
+    <nav>
+      <h2>To Do Page</h2>
+    </nav>
+    <aside>
+      <h1>Your Projects <button id="addProject">+</button></h1>
+      <ul class="project-buttonGroup"></ul>
+    </aside>
+    <div class="content">
+      <div class="content-header">
+        <h1>Hello World</h1>
+        <button id="addTodo">+</button>
+      </div>
+      <div class="todo-list"></div>
+    </div>
+
+    <dialog class="dialog-project">
+      <div class="dialog-header">
+        <h3>Add Project</h3>
+        <button class="dialog-close">X</button>
+      </div>
+
+      <form action="" method="" id="project-form">
+        <div class="form-input-container">
+          <div class="form-label">
+            <label for="project-title">Title:</label>
+            <label for="project-description">Description:</label>
+          </div>
+          <div class="form-input">
+            <input type="text" name="project-title" id="project-title" />
+            <input
+              type="text"
+              name="project-description"
+              id="project-description"
+            />
+          </div>
+        </div>
+        <div class="dialog-buttonGroup">
+          <button type="reset">Reset</button>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="dialog-todo">
+      <div class="dialog-header">
+        <h3>Add To Do</h3>
+        <button class="dialog-close">X</button>
+      </div>
+      <form action="" method="" id="todo-form">
+        <select name="project-selection" id="project-selection">
+          <option value="" selected disabled>Select A Project</option>
+        </select>
+        <div class="form-input-container">
+          <div class="form-label">
+            <label for="todo-title">Title:</label>
+            <label for="todo-description">Description:</label>
+            <label for="todo-duedate">Due Date:</label>
+            <label for="todo-priority">Priority:</label>
+          </div>
+          <div class="form-input">
+            <input type="text" name="todo-title" id="todo-title" />
+            <input type="text" name="todo-description" id="todo-description" />
+            <input type="date" name="todo-duedate" id="todo-duedate" />
+            <select name="todo-priority" id="todo-priority">
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+        </div>
+        <div class="dialog-buttonGroup">
+          <button type="reset">Reset</button>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
