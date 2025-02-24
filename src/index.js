@@ -65,6 +65,7 @@ todoForm.addEventListener("submit", (e) => {
 
   dialogTodo.close();
   todoForm.reset();
+  init(formData.projectSelection);
 });
 
 function displayProjects() {
@@ -79,12 +80,19 @@ function displayProjects() {
     option.value = index;
     projectSelect.appendChild(option);
 
-    projectButtonGroup.innerHTML += `<li>${project.title}</li>`;
+    projectButtonGroup.innerHTML += `<li data-index=${index}>${project.title}</li>`;
+  });
+
+  projectButtonGroup.addEventListener("click", (e) => {
+    if (e.target.localName === "li") {
+      displayTodo(e.target.dataset.index);
+    }
   });
 }
 
 function displayTodo(index) {
   const todoList = document.querySelector(".todo-list");
+  todoList.textContent = "";
 
   projectList[index].todos.forEach((todos) => {
     const todoCard = document.createElement("div");
@@ -104,8 +112,8 @@ function displayTodo(index) {
   });
 }
 
-function init() {
+function init(index = 0) {
   displayProjects();
-  displayTodo(0);
+  displayTodo(index);
 }
 init();
