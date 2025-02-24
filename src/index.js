@@ -1,11 +1,7 @@
 import "./css/styles.css";
-import "./css/dialog-styles.css";
-import "./css/form-styles.css";
 import { projectList, addTodos, addProjects } from "./helpers/db-actions.js";
 
 // let currentProjectIndex = 0;
-const projectSelect = document.querySelector("select#project-selection");
-
 const btnAddProject = document.querySelector("#addProject");
 const dialogProject = document.querySelector(".dialog-project");
 btnAddProject.addEventListener("click", () => {
@@ -72,16 +68,44 @@ todoForm.addEventListener("submit", (e) => {
 });
 
 function displayProjects() {
+  const projectSelect = document.querySelector("select#project-selection");
+  const projectButtonGroup = document.querySelector(".project-buttonGroup");
+
   projectSelect.textContent = "";
+  projectButtonGroup.textContent = "";
   projectList.forEach((project, index) => {
     let option = document.createElement("option");
     option.textContent = project.title;
     option.value = index;
     projectSelect.appendChild(option);
+
+    projectButtonGroup.innerHTML += `<li>${project.title}</li>`;
+  });
+}
+
+function displayTodo(index) {
+  const todoList = document.querySelector(".todo-list");
+
+  projectList[index].todos.forEach((todos) => {
+    const todoCard = document.createElement("div");
+    todoCard.classList.add("todo-card");
+    todoCard.innerHTML = `<section class="todo-card-header">
+                            <div>
+                              <h2>${todos.title}</h2>
+                              <h5>${todos.dueDate}</h5>
+                            </div>
+                              <h5>${todos.priority}</h5>
+                          </section>
+                          <article>
+                            ${todos.description}
+                          </article>`;
+
+    todoList.appendChild(todoCard);
   });
 }
 
 function init() {
   displayProjects();
+  displayTodo(0);
 }
 init();

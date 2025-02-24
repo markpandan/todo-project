@@ -1,4 +1,6 @@
 @import url(constants.css);
+@import url(dialog-styles.css);
+@import url(form-styles.css);
 
 body {
   margin: 0;
@@ -26,7 +28,7 @@ button {
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
-.project-list {
+.project-buttonGroup {
   list-style: none;
   padding: 0;
   margin-top: 1rem;
@@ -36,7 +38,7 @@ button {
   gap: 2rem;
 }
 
-.project-list > li {
+.project-buttonGroup > li {
   border-bottom: 1px solid white;
 }
 
@@ -87,24 +89,25 @@ aside {
   padding: 0.5rem 0.5rem;
 } */
 
-.task-list {
+.todo-list {
   margin-top: 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 0.75rem;
 }
 
-.task-card {
+.todo-card {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 
+  height: 256px;
   background-color: var(--black-5);
   border-radius: 16px;
   padding: 1.5rem;
 }
 
-.task-card-header {
+.todo-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
