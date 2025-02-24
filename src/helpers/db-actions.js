@@ -41,7 +41,7 @@ export class DatabaseLocalStorage {
     todo.descrption = description;
     todo.dueDate = dueDate;
     todo.priority = priority;
-    project.todos.push(todo);
+    project.todo.push(todo);
 
     localStorage.setItem(index, JSON.stringify(project));
     this.setProject();
